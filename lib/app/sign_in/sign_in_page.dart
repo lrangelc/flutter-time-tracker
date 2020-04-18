@@ -13,9 +13,7 @@ class SignInPage extends StatelessWidget {
     try {
       final authResult = await FirebaseAuth.instance.signInAnonymously();
       onSignIn(authResult.user);
-      
       print('${authResult.user.uid}');
-      print('yeap');
     } catch (err) {
       print(err.toString());
     }

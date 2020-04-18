@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatelessWidget {
+  final VoidCallback onSignOut;
+  HomePage({@required this.onSignOut});
+
+  Future<void> _signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      this.onSignOut();
+    } catch (err) {
+      print(err.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +26,7 @@ class HomePage extends StatelessWidget {
               'Logout',
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
-            onPressed: () {},
+            onPressed: _signOut,
           ),
         ],
       ),
