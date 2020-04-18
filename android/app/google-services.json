@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "596958338322",
+    "firebase_url": "https://blogeekplatzilarc.firebaseio.com",
+    "project_id": "blogeekplatzilarc",
+    "storage_bucket": "blogeekplatzilarc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596958338322:android:0fbe61e0eea445280ae7cb",
+        "android_client_info": {
+          "package_name": "com.luisrangelc.flutter_time_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596958338322-aeul3a3e3can6h55lkps85mk1f0s99jk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luisrangelc.flutter_time_tracker",
+            "certificate_hash": "3434cd29c80b96deb5b155b325c604188b5c654e"
+          }
+        },
+        {
+          "client_id": "596958338322-luc6mrqs1ijapik969inag4hsvhm2fn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNRKP-LIQfV3IXBc-ZPYLCsK5essvxQ1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596958338322-luc6mrqs1ijapik969inag4hsvhm2fn8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
