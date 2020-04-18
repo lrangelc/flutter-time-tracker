@@ -4,12 +4,14 @@ import 'package:flutter_time_tracker/common_widgets/custom_raised_button.dart';
 
 class SocialSignInButton extends CustomRaisedButtom {
   SocialSignInButton(
-      {String text,
+      {@required String text,
       Color color,
       Color textColor,
       VoidCallback onPressed,
-      String assetName})
-      : super(
+      String assetName: 'images/network-logo.png'})
+      : assert(text != null),
+        assert(assetName != null),
+        super(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -27,6 +29,6 @@ class SocialSignInButton extends CustomRaisedButtom {
           color: color,
           onPressed: onPressed,
           borderRadius: 16.0,
-          height: 40.0,
+          height: 50.0,
         );
 }
