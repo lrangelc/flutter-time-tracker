@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_time_tracker/services/auth.dart';
+import 'package:flutter_time_tracker/common_widgets/platform_alert_dialog.dart';
+import 'package:flutter_time_tracker/services/auth_provider.dart';
 
 class HomePage extends StatelessWidget {
-  final AuthBase auth;
 
-  HomePage({@required this.auth});
-
-  Future<void> _signOut() async {
+  Future<void> _signOut(BuildContext context) async {
     try {
+      final auth = AuthProvider.of(context);
+
       await auth.signOut();
     } catch (err) {
-      print(err.toString());
+      PlatformAlertDialog(
+        title: 'Sign in failed',
+        content: err.toString(),
+        defaultActionText: 'OK',
+      ).show(context);
+    }
+  }
+
+  Future<void> _confirmSignOut(BuildContext context) async {
+    final bool didRequestSignOut = await PlatformAlertDialog(
+      title: 'Logout',
+      content: 'Are you sure that you want to logout?',
+      defaultActionText: 'Logout',
+      cancelActionText: 'Cancel',
+    ).show(context);
+    if (didRequestSignOut) {
+      _signOut(context);
     }
   }
 
@@ -27,7 +43,7 @@ class HomePage extends StatelessWidget {
               'Logout',
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
-            onPressed: _signOut,
+            onPressed: () => _confirmSignOut(context),
           ),
         ],
       ),
