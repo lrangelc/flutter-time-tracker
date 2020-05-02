@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -168,4 +169,5 @@ class Auth implements AuthBase {
     await facebookSignIn.logOut();
     await _firebaseAuth.signOut();
   }
+
 }
