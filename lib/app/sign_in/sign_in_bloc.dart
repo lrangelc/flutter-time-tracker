@@ -26,9 +26,8 @@ class SignInBloc {
       _setIsLoading(true);
       return await signInMethod();
     } catch (err) {
-      rethrow;
-    } finally {
       _setIsLoading(false);
+      rethrow;
     }
   }
 
