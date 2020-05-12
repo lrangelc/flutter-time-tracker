@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Luis Rangel'),
+        title: Text('Time Tracker Control'),
         centerTitle: true,
         actions: <Widget>[
           FlatButton(
