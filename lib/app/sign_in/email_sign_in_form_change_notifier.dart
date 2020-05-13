@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_time_tracker/app/sign_in/email_sign_in_change_model.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_time_tracker/app/sign_in/email_sign_in_model.dart';
 import 'package:flutter_time_tracker/common_widgets/platform_exception_alert_dialog.dart';
 
 import 'package:flutter_time_tracker/common_widgets/form_submit_button.dart';
