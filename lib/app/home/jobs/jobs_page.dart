@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_time_tracker/app/home/jobs/edit_job_page.dart';
+import 'package:flutter_time_tracker/app/home/jobs/job_list_tile.dart';
 
 import 'package:flutter_time_tracker/app/home/models/job.dart';
 import 'package:flutter_time_tracker/common_widgets/platform_alert_dialog.dart';
-import 'package:flutter_time_tracker/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:flutter_time_tracker/services/auth.dart';
 import 'package:flutter_time_tracker/services/database.dart';
 import 'package:provider/provider.dart';
@@ -52,23 +53,23 @@ class JobsPage extends StatelessWidget {
       ),
       body: _buildContents(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _createJob(context),
+        onPressed: () => EditJobPage.show(context),
         child: Icon(Icons.add),
       ),
     );
   }
 
-  Future<void> _createJob(BuildContext context) async {
-    try {
-      final database = Provider.of<Database>(context, listen: false);
-      await database.createJob(Job(name: 'Blogging', ratePerHour: 10));
-    } catch (err) {
-      PlatformExceptionAlertDialog(
-        title: 'Operation failed',
-        exception: err,
-      ).show(context);
-    }
-  }
+  // Future<void> _createJob(BuildContext context) async {
+  //   try {
+  //     final database = Provider.of<Database>(context, listen: false);
+  //     await database.createJob(Job(name: 'Blogging', ratePerHour: 10));
+  //   } catch (err) {
+  //     PlatformExceptionAlertDialog(
+  //       title: 'Operation failed',
+  //       exception: err,
+  //     ).show(context);
+  //   }
+  // }
 
   Widget _buildContents(BuildContext context) {
     final database = Provider.of<Database>(context);
@@ -77,14 +78,24 @@ class JobsPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final jobs = snapshot.data;
-          final children = jobs.map((job) => Text(job.name)).toList();
+          final children = jobs
+              .map((job) => JobListTile(
+                    job: job,
+                    onTap: () => EditJobPage.show(
+                      context,
+                      job: job,
+                    ),
+                  ))
+              .toList();
 
           return ListView(
             children: children,
           );
         }
         if (snapshot.hasError) {
-          return Center(child: Text('Some error occurred'),);
+          return Center(
+            child: Text('Some error occurred'),
+          );
         }
         return Center(
           child: CircularProgressIndicator(),
