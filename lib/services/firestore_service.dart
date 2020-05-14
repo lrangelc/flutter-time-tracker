@@ -7,14 +7,25 @@ class FirestoreService {
 
   Future<void> setData({String path, Map<String, dynamic> data}) async {
     final reference = Firestore.instance.document(path);
+    data['createdAt'] = FieldValue.serverTimestamp();
+    data['statusId'] = 1;
     print('$path: $data');
     await reference.setData(data);
   }
 
   Future<void> setData2({String path, Map<String, dynamic> data}) async {
     final reference = Firestore.instance.collection(path).document();
+    data['createdAt'] = FieldValue.serverTimestamp();
+    data['statusId'] = 1;
     print('reference: ${reference.documentID} $path: $data');
     await reference.setData(data);
+  }
+
+  Future<void> updateData({String path, Map<String, dynamic> data}) async {
+    final reference = Firestore.instance.document(path);
+    data['updatedAt'] = FieldValue.serverTimestamp();
+    print('$path: $data');
+    await reference.updateData(data);
   }
 
   Stream<List<T>> collectionStream<T>(
