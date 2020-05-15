@@ -47,16 +47,50 @@ class FirestoreService {
     await reference.updateData(data);
   }
 
-  Stream<List<T>> collectionStream<T>(
-      {@required String path,
-      @required T builder(Map<String, dynamic> data, String documentId)}) {
-    final reference =
+  // Stream<List<T>> collectionStream<T>(
+  //     {@required String path,
+  //     @required T builder(Map<String, dynamic> data, String documentId)}) {
+  //   final reference =
+  //       Firestore.instance.collection(path).where('statusId', isEqualTo: 1);
+  //   final snapshots = reference.snapshots();
+  //   return snapshots.map((event) => event.documents
+  //       .map(
+  //         (snapshot) => builder(snapshot.data, snapshot.documentID),
+  //       )
+  //       .toList());
+  // }
+
+  Stream<List<T>> collectionStream<T>({
+    @required String path,
+    @required T builder(Map<String, dynamic> data, String documentID),
+    Query queryBuilder(Query query),
+    int sort(T lhs, T rhs),
+  }) {
+    Query query =
         Firestore.instance.collection(path).where('statusId', isEqualTo: 1);
-    final snapshots = reference.snapshots();
-    return snapshots.map((event) => event.documents
-        .map(
-          (snapshot) => builder(snapshot.data, snapshot.documentID),
-        )
-        .toList());
+    if (queryBuilder != null) {
+      query = queryBuilder(query);
+    }
+    final Stream<QuerySnapshot> snapshots = query.snapshots();
+    return snapshots.map((snapshot) {
+      final result = snapshot.documents
+          .map((snapshot) => builder(snapshot.data, snapshot.documentID))
+          .where((value) => value != null)
+          .toList();
+      if (sort != null) {
+        result.sort(sort);
+      }
+      return result;
+    });
+  }
+
+  Stream<T> documentStream<T>({
+    @required String path,
+    @required T builder(Map<String, dynamic> data, String documentID),
+  }) {
+    final DocumentReference reference = Firestore.instance.document(path);
+    final Stream<DocumentSnapshot> snapshots = reference.snapshots();
+    return snapshots
+        .map((snapshot) => builder(snapshot.data, snapshot.documentID));
   }
 }
