@@ -11,7 +11,7 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Accoun t'),
+        title: Text('Account'),
         centerTitle: true,
         actions: <Widget>[
           FlatButton(
