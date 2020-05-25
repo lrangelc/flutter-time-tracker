@@ -4,12 +4,14 @@ import 'package:flutter_time_tracker/common_widgets/custom_raised_button.dart';
 
 class SignInButton extends CustomRaisedButtom {
   SignInButton(
-      {@required String text,
+      {Key key,
+      @required String text,
       Color color,
       Color textColor,
       VoidCallback onPressed})
       : assert(text != null),
         super(
+          key: key,
           child: Text(
             text,
             style: TextStyle(color: textColor, fontSize: 15.0),

@@ -8,11 +8,14 @@ class CustomRaisedButtom extends StatelessWidget {
   final double height;
 
   CustomRaisedButtom(
-      {this.child,
+      {Key key,
+      this.child,
       this.color,
       this.borderRadius: 2.0,
       this.onPressed,
-      this.height: 50.0}):assert(borderRadius != null);
+      this.height: 50.0})
+      : assert(borderRadius != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -9,9 +9,15 @@ import 'package:flutter_time_tracker/app/sign_in/validators.dart';
 import 'package:flutter_time_tracker/common_widgets/form_submit_button.dart';
 import 'package:flutter_time_tracker/services/auth.dart';
 
-class EmailSignInFormStateful extends StatefulWidget with EmailAndPasswordValidators {
+class EmailSignInFormStateful extends StatefulWidget
+    with EmailAndPasswordValidators {
+  final VoidCallback onSignedIn;
+
+  EmailSignInFormStateful({this.onSignedIn});
+
   @override
-  _EmailSignInFormStatefulState createState() => _EmailSignInFormStatefulState();
+  _EmailSignInFormStatefulState createState() =>
+      _EmailSignInFormStatefulState();
 }
 
 class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
@@ -53,7 +59,10 @@ class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
           await auth.createUserWithEmailAndPassword(
               this._email, this._password);
         }
-        Navigator.of(context).pop();
+        if (widget.onSignedIn != null) {
+          widget.onSignedIn();
+        }
+        // Navigator.of(context).pop();
       } on PlatformException catch (err) {
         PlatformExceptionAlertDialog(
           title: 'Sign in failed',
@@ -129,6 +138,7 @@ class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
         this._submitted && !widget.emailValidator.isValid(this._email);
 
     return TextField(
+      key: Key('email'),
       controller: _emailController,
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
@@ -150,6 +160,7 @@ class _EmailSignInFormStatefulState extends State<EmailSignInFormStateful> {
         this._submitted && !widget.emailValidator.isValid(this._password);
 
     return TextField(
+      key: Key('password'),
       controller: _passwordController,
       focusNode: _passwordFocusNode,
       decoration: InputDecoration(
