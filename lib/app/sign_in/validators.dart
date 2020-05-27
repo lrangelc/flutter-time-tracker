@@ -17,4 +17,5 @@ class EmailAndPasswordValidators {
   final StringValidator passwordValidator = NonEmptyStringValidator();
   final String invalidEmailErrorText = 'Email can\'t be empty';
   final String invalidPasswordErrorText = 'Password can\'t be empty';
+  final String invalidConfirmPasswordErrorText = 'Passwords do not match';
 }

@@ -104,7 +104,7 @@ class _EmailSignInFormBlocBasedState extends State<EmailSignInFormBlocBased> {
       focusNode: _emailFocusNode,
       decoration: InputDecoration(
         labelText: 'Email',
-        hintText: 'text@test.com',
+        hintText: 'test@test.com',
         errorText: model.emailErrorText,
         enabled: !model.isLoading,
       ),
